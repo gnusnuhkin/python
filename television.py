@@ -10,7 +10,7 @@ class Television:
     MAX_CHANNEL = 3
 
     def __init__(self) -> None:
-        """Initialize the television with default values."""
+        """Default values."""
         self.__status: bool = False
         self.__muted: bool = False
         self.__volume: int = Television.MIN_VOLUME
@@ -18,11 +18,11 @@ class Television:
         self.__last_volume: int = Television.MIN_VOLUME
 
     def power(self) -> None:
-        """Toggle the power status of the TV."""
+        """Power status of the TV."""
         self.__status = not self.__status
 
     def mute(self) -> None:
-        """Toggle mute status when the TV is on."""
+        """Mute status when the TV is on."""
         if self.__status:
             if not self.__muted:
                 self.__muted = True
@@ -33,21 +33,21 @@ class Television:
                 self.__volume = self.__last_volume
 
     def channel_up(self) -> None:
-        """Increase the channel by 1, looping back to MIN_CHANNEL after MAX_CHANNEL."""
+        """Increase the channel by 1"""
         if self.__status:
             self.__channel += 1
             if self.__channel > Television.MAX_CHANNEL:
                 self.__channel = Television.MIN_CHANNEL
 
     def channel_down(self) -> None:
-        """Decrease the channel by 1, looping back to MAX_CHANNEL after MIN_CHANNEL."""
+        """Decrease the channel by 1"""
         if self.__status:
             self.__channel -= 1
             if self.__channel < Television.MIN_CHANNEL:
                 self.__channel = Television.MAX_CHANNEL
 
     def volume_up(self) -> None:
-        """Increase the volume by 1, unmuting if muted."""
+        """Increase the volume by 1."""
         if self.__status:
             if self.__muted:
                 self.__muted = False
@@ -56,7 +56,7 @@ class Television:
                 self.__volume += 1
 
     def volume_down(self) -> None:
-        """Decrease the volume by 1, unmuting if muted."""
+        """Decrease the volume by 1."""
         if self.__status:
             if self.__muted:
                 self.__muted = False
@@ -65,5 +65,5 @@ class Television:
                 self.__volume -= 1
 
     def __str__(self) -> str:
-        """Return the television's current status."""
+        """Return the television's current status"""
         return f"Power = {self.__status}, Channel = {self.__channel}, Volume = {self.__volume}"
