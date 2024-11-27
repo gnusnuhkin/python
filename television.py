@@ -9,61 +9,61 @@ class Television:
     MIN_CHANNEL = 0
     MAX_CHANNEL = 3
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the television with default values."""
-        self.__status = False
-        self.__muted = False
-        self.__volume = self.MIN_VOLUME
-        self.__channel = self.MIN_CHANNEL
-        self.__last_volume = self.MIN_VOLUME
+        self.__status: bool = False
+        self.__muted: bool = False
+        self.__volume: int = Television.MIN_VOLUME
+        self.__channel: int = Television.MIN_CHANNEL
+        self.__last_volume: int = Television.MIN_VOLUME
 
-    def power(self):
+    def power(self) -> None:
         """Toggle the power status of the TV."""
         self.__status = not self.__status
 
-    def mute(self):
+    def mute(self) -> None:
         """Toggle mute status when the TV is on."""
         if self.__status:
             if not self.__muted:
                 self.__muted = True
                 self.__last_volume = self.__volume
-                self.__volume = self.MIN_VOLUME
+                self.__volume = Television.MIN_VOLUME
             else:
                 self.__muted = False
                 self.__volume = self.__last_volume
 
-    def channel_up(self):
+    def channel_up(self) -> None:
         """Increase the channel by 1, looping back to MIN_CHANNEL after MAX_CHANNEL."""
         if self.__status:
             self.__channel += 1
-            if self.__channel > self.MAX_CHANNEL:
-                self.__channel = self.MIN_CHANNEL
+            if self.__channel > Television.MAX_CHANNEL:
+                self.__channel = Television.MIN_CHANNEL
 
-    def channel_down(self):
+    def channel_down(self) -> None:
         """Decrease the channel by 1, looping back to MAX_CHANNEL after MIN_CHANNEL."""
         if self.__status:
             self.__channel -= 1
-            if self.__channel < self.MIN_CHANNEL:
-                self.__channel = self.MAX_CHANNEL
+            if self.__channel < Television.MIN_CHANNEL:
+                self.__channel = Television.MAX_CHANNEL
 
-    def volume_up(self):
+    def volume_up(self) -> None:
         """Increase the volume by 1, unmuting if muted."""
         if self.__status:
             if self.__muted:
                 self.__muted = False
                 self.__volume = self.__last_volume
-            if self.__volume < self.MAX_VOLUME:
+            if self.__volume < Television.MAX_VOLUME:
                 self.__volume += 1
 
-    def volume_down(self):
+    def volume_down(self) -> None:
         """Decrease the volume by 1, unmuting if muted."""
         if self.__status:
             if self.__muted:
                 self.__muted = False
                 self.__volume = self.__last_volume
-            if self.__volume > self.MIN_VOLUME:
+            if self.__volume > Television.MIN_VOLUME:
                 self.__volume -= 1
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return the television's current status."""
         return f"Power = {self.__status}, Channel = {self.__channel}, Volume = {self.__volume}"
